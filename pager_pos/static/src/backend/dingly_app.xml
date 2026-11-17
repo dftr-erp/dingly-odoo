@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-name="pager_pos.DinglyApp">
+    <t t-name="pager_pos.DinglyApp" owl="1">
         <div class="pager-app o_action">
             <DinglyFrame t-if="state.base" baseUrl="state.base"/>
             <div t-elif="state.loaded" class="pager-app-empty">

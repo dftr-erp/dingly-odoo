@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-    <t t-name="pager_pos.PagerRail">
+    <t t-name="pager_pos.PagerRail" owl="1">
         <section t-if="configured" class="pager-rail" t-att-class="{'is-collapsed': ui.collapsed, 'is-offline': rail.offline, 'is-full': capFull}" aria-label="Dingly rail">
             <header class="pager-rail-head">
                 <button type="button" class="pager-rail-title" t-on-click="toggleCollapsed" t-att-aria-expanded="ui.collapsed ? 'false' : 'true'">

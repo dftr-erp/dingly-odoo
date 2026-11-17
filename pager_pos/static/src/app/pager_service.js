@@ -10,11 +10,19 @@ export function displayNumberOf(order) {
   if (!order) {
     return null;
   }
-  const value = order.tracking_number ?? order.trackingNumber;
+  // Odoo 16 has no tracking number: the running number of the order in its
+  // session (the last block of the receipt reference) is the guest-facing number.
+  const value = order.sequence_number;
   if (typeof value === "string" || typeof value === "number") {
     return value;
   }
   return null;
+}
+
+/** Stable id of an Odoo 16 POS order (the uid, same as the receipt reference). */
+export function orderKey(order) {
+  const value = order && order.uid;
+  return typeof value === "string" && value ? value : null;
 }
 
 function rowUuid(row, requested) {
@@ -112,7 +120,7 @@ export class PagerSession {
   }
 
   async assign(order, assigned) {
-    const uuid = order && order.uuid;
+    const uuid = orderKey(order);
     if (!uuid) {
       return;
     }
@@ -151,7 +159,7 @@ export class PagerSession {
   }
 
   async setStatus(order, status) {
-    const uuid = order && order.uuid;
+    const uuid = orderKey(order);
     if (!uuid) {
       return;
     }
@@ -277,7 +285,7 @@ export class PagerSession {
   async railSetStatus(posOrderUuid, status) {
     const known = this.state.byUuid[posOrderUuid];
     if (known) {
-      await this.setStatus({ uuid: posOrderUuid }, status);
+      await this.setStatus({ uid: posOrderUuid }, status);
       if (known.error) {
         throw new Error(known.error);
       }
@@ -293,9 +301,9 @@ export class PagerSession {
     if (!number) {
       throw new Error("Type the order number.");
     }
-    if (order?.uuid && String(displayNumberOf(order) ?? "") === number) {
+    if (orderKey(order) && String(displayNumberOf(order) ?? "") === number) {
       await this.assign(order, true);
-      const current = this.state.byUuid[order.uuid];
+      const current = this.state.byUuid[orderKey(order)];
       if (this.state.full) {
         throw Object.assign(new Error("All pagers are in use. Mark one done first."), { code: "pager_cap" });
       }

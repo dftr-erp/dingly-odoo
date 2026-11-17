@@ -1,6 +1,6 @@
 # Dingly for Odoo Point of Sale
 
-Connect an Odoo 18 register to the restaurant pager service. The cashier receipt prints Odoo's order tracking number in large type. Assign and Done call the pager service. Caps and subscription stay on the pager service.
+Connect an Odoo 16 register to the restaurant pager service. The cashier receipt prints the order number (the running number of the order in the POS session, the last block of Odoo's receipt reference) in large type. Assign and Done call the pager service. Caps and subscription stay on the pager service.
 
 License: LGPL-3.
 
@@ -23,7 +23,7 @@ The shop dashboard lists the same order and status code, because both screens re
 
 ## Cashier
 
-After payment, the receipt shows the order tracking number in large type. That is Odoo's number.
+After payment, the receipt shows the order number in large type. It is the running number of the order in the POS session, the last block of the Odoo 16 receipt reference.
 
 On the receipt screen, **Assign** binds that number to the counter and marks the pager on track. **Done** marks it done. **Not done** clears it without a done stamp. The same controls sit on the Orders list for the selected ticket.
 

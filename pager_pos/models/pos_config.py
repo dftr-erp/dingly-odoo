@@ -97,7 +97,7 @@ class PosConfig(models.Model):
             "type": "ir.actions.act_window",
             "name": _("Dingly orders"),
             "res_model": "pager.desk.order",
-            "view_mode": "list,form",
+            "view_mode": "tree,form",
             "domain": [("pos_config_id", "=", self.id)],
             "context": {"default_pos_config_id": self.id},
         }
@@ -109,20 +109,3 @@ class PosConfig(models.Model):
         if orders:
             orders.action_refresh()
         return True
-
-    @api.model
-    def _load_pos_data_fields(self, config_id):
-        field_names = list(super()._load_pos_data_fields(config_id))
-        # An empty list means every field. Filling it would hide the rest of the register.
-        if not field_names:
-            return field_names
-        for name in (
-            "pager_api_base",
-            "pager_credential",
-            "pager_site_id",
-            "pager_counter_code",
-            "pager_counter_name",
-        ):
-            if name not in field_names:
-                field_names.append(name)
-        return field_names

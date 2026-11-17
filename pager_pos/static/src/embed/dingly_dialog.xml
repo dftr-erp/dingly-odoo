@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates xml:space="preserve">
-    <t t-name="pager_pos.DinglyDialog">
-        <Dialog size="'fullscreen'" header="false" footer="false" bodyClass="'p-0 pager-embed-dialog-body'" contentClass="'pager-embed-dialog'" technical="false">
-            <DinglyFrame baseUrl="props.baseUrl" onClose="props.close"/>
-        </Dialog>
-    </t>
-</templates>
