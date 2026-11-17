@@ -3,7 +3,7 @@
 
 {
     "name": "Dingly",
-    "version": "18.0.1.2.0",
+    "version": "19.0.1.2.0",
     "category": "Sales/Point of Sale",
     "summary": "Order pager, live rail board and stamp card for Odoo POS. Guests follow their order on their phone.",
     "description": """
@@ -48,7 +48,6 @@ The Point of Sale dashboard can also place an order and show its status code.
             "pager_pos/static/src/app/pager_widget/pager_widget.xml",
             "pager_pos/static/src/app/pager_rail/pager_rail.js",
             "pager_pos/static/src/app/pager_rail/pager_rail.xml",
-            "pager_pos/static/src/app/models/pos_order.js",
             "pager_pos/static/src/app/receipt/order_receipt.js",
             "pager_pos/static/src/app/receipt/order_receipt.xml",
             "pager_pos/static/src/app/screens/receipt_screen.js",

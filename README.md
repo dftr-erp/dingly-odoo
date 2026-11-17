@@ -1,6 +1,6 @@
 # Dingly for Odoo Point of Sale
 
-Order pager, live "On the rail" board and stamp card for **Odoo 18** POS. Guests follow their order on their own phone; one tap at the till tells them it's ready. The full Dingly shop app also opens inside Odoo, behind your Dingly login.
+Order pager, live "On the rail" board and stamp card for **Odoo 19** POS. Guests follow their order on their own phone; one tap at the till tells them it's ready. The full Dingly shop app also opens inside Odoo, behind your Dingly login.
 
 ![Dingly rail board in Odoo POS](pager_pos/static/description/banner.png)
 
@@ -17,4 +17,4 @@ Order pager, live "On the rail" board and stamp card for **Odoo 18** POS. Guests
 
 Details: [pager_pos/README.md](pager_pos/README.md). Support: https://dingly.win/support
 
-License: LGPL-3 (see LICENSE). Branch `18.0` targets Odoo 18.
+License: LGPL-3 (see LICENSE). Branch `19.0` targets Odoo 19.

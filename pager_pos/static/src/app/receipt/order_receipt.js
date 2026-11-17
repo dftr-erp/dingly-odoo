@@ -5,13 +5,13 @@ import { patch } from "@web/core/utils/patch";
 
 patch(OrderReceipt.prototype, {
   get pagerTrackingNumber() {
-    const data = this.props.data || {};
-    const header = data.headerData || {};
-    if (header.bigTrackingNumber && header.trackingNumber) {
+    const order = this.props.order || {};
+    const config = order.config || {};
+    // Odoo shows a big number itself when this is on; don't repeat it.
+    if (config.displayBigTrackingNumber && order.tracking_number) {
       return "";
     }
-    const value =
-      data.trackingNumber ?? data.tracking_number ?? header.trackingNumber;
+    const value = order.tracking_number;
     if (
       value === undefined ||
       value === null ||

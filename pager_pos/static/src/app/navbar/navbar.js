@@ -1,6 +1,6 @@
 /** @odoo-module */
 
-import { Navbar } from "@point_of_sale/app/navbar/navbar";
+import { Navbar } from "@point_of_sale/app/components/navbar/navbar";
 import { patch } from "@web/core/utils/patch";
 import { dinglyEmbedUrl } from "@pager_pos/embed/dingly_frame";
 import { openDinglyOverlay } from "@pager_pos/embed/open_overlay";

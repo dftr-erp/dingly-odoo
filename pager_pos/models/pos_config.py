@@ -111,8 +111,8 @@ class PosConfig(models.Model):
         return True
 
     @api.model
-    def _load_pos_data_fields(self, config_id):
-        field_names = list(super()._load_pos_data_fields(config_id))
+    def _load_pos_data_fields(self, config):
+        field_names = list(super()._load_pos_data_fields(config))
         # An empty list means every field. Filling it would hide the rest of the register.
         if not field_names:
             return field_names

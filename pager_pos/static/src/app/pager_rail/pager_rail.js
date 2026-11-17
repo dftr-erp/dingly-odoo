@@ -1,7 +1,7 @@
 /** @odoo-module */
 
 import { Component, onMounted, onWillUnmount, useRef, useState } from "@odoo/owl";
-import { usePos } from "@point_of_sale/app/store/pos_hook";
+import { usePos } from "@point_of_sale/app/hooks/pos_hook";
 import { _t } from "@web/core/l10n/translation";
 import { dinglyEmbedUrl } from "@pager_pos/embed/dingly_frame";
 import { openDinglyOverlay } from "@pager_pos/embed/open_overlay";
@@ -83,7 +83,7 @@ export class PagerRail extends Component {
   }
 
   get currentOrder() {
-    return this.pos.get_order?.() || null;
+    return this.pos.getOrder?.() || null;
   }
 
   get tickets() {

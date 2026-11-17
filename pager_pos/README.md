@@ -1,6 +1,6 @@
 # Dingly for Odoo Point of Sale
 
-Connect an Odoo 18 register to the restaurant pager service. The cashier receipt prints Odoo's order tracking number in large type. Assign and Done call the pager service. Caps and subscription stay on the pager service.
+Connect an Odoo 19 register to the restaurant pager service. The cashier receipt prints Odoo's order tracking number in large type. Assign and Done call the pager service. Caps and subscription stay on the pager service.
 
 License: LGPL-3.
 
