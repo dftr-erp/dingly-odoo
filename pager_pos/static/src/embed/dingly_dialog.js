@@ -1,15 +1,11 @@
 /** @odoo-module */
 
-import { Component } from "@odoo/owl";
-import { Dialog } from "@web/core/dialog/dialog";
+import { AbstractAwaitablePopup } from "@point_of_sale/app/popup/abstract_awaitable_popup";
 import { DinglyFrame } from "@pager_pos/embed/dingly_frame";
 
 /** Fullscreen overlay with the embedded Dingly app (POS). */
-export class DinglyDialog extends Component {
+export class DinglyDialog extends AbstractAwaitablePopup {
   static template = "pager_pos.DinglyDialog";
-  static components = { Dialog, DinglyFrame };
-  static props = {
-    baseUrl: { type: String, optional: true },
-    close: Function,
-  };
+  static components = { DinglyFrame };
+  static defaultProps = { baseUrl: "" };
 }

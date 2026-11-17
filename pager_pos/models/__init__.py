@@ -4,3 +4,4 @@
 from . import pager_http
 from . import pos_config
 from . import pager_desk_order
+from . import pos_session

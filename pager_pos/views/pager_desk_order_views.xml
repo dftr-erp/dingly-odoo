@@ -4,7 +4,7 @@
         <field name="name">pager.desk.order.list</field>
         <field name="model">pager.desk.order</field>
         <field name="arch" type="xml">
-            <list decoration-info="status == 'on_track'" decoration-success="status == 'done'" decoration-muted="status == 'not_done'">
+            <tree decoration-info="status == 'on_track'" decoration-success="status == 'done'" decoration-muted="status == 'not_done'">
                 <header>
                     <button name="action_refresh" type="object" string="Refresh status"/>
                 </header>
@@ -13,7 +13,7 @@
                 <field name="status_message"/>
                 <field name="counter_code"/>
                 <field name="pos_config_id"/>
-            </list>
+            </tree>
         </field>
     </record>
 
@@ -61,7 +61,7 @@
     <record id="action_pager_desk_order" model="ir.actions.act_window">
         <field name="name">Dingly Orders</field>
         <field name="res_model">pager.desk.order</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Place a pager order</p>
             <p>Enter the order number, then place it. The status code comes from the pager service.</p>

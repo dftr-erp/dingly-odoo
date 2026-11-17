@@ -69,3 +69,6 @@
 .modal-dialog:has(.pager-embed-dialog) { margin: 0; width: 100vw; max-width: 100vw; height: 100vh; }
 .modal-dialog:has(.pager-embed-dialog) .modal-body { overflow: hidden; }
 .pager-embed-dialog .modal-body { padding: 0; }
+
+/* POS 17 popup host for the Dingly overlay. */
+.pager-embed-popup { position: fixed; inset: 0; z-index: 10050; width: 100vw; height: 100vh; background: #faf6ef; }

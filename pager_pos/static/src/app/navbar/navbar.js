@@ -10,6 +10,6 @@ patch(Navbar.prototype, {
     return Boolean(dinglyEmbedUrl(this.pos.config.pager_api_base));
   },
   openDingly() {
-    openDinglyOverlay(this.dialog, this.pos.config.pager_api_base);
+    openDinglyOverlay(this.popup, this.pos.config.pager_api_base);
   },
 });

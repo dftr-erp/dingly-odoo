@@ -37,7 +37,7 @@ export class PagerRail extends Component {
   setup() {
     this.pos = usePos();
     this.pager = ensurePager(this.pos);
-    this.dialog = useService("dialog");
+    this.popup = useService("popup");
     this.rail = useState(this.pager.rail);
     this.ui = useState({
       collapsed: readCollapsed(),
@@ -79,7 +79,7 @@ export class PagerRail extends Component {
   }
 
   openDingly() {
-    openDinglyOverlay(this.dialog, this.pos.config.pager_api_base);
+    openDinglyOverlay(this.popup, this.pos.config.pager_api_base);
   }
 
   get currentOrder() {

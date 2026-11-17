@@ -37,7 +37,7 @@
                     <a name="action_pager_orders" type="object">Dingly orders</a>
                 </div>
             </xpath>
-            <xpath expr="//div[@name='card_left']/parent::div" position="after">
+            <xpath expr="//div[hasclass('o_kanban_card_content')]" position="after">
                 <div class="row g-0 ms-2 mt-2" name="pager_desk">
                     <div class="col-12">
                         <button class="btn btn-secondary" name="action_pager_place_order" type="object">Place order</button>

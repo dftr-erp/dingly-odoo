@@ -3,7 +3,7 @@
 
 {
     "name": "Dingly",
-    "version": "18.0.1.2.0",
+    "version": "17.0.1.2.0",
     "category": "Sales/Point of Sale",
     "summary": "Order pager, live rail board and stamp card for Odoo POS. Guests follow their order on their phone.",
     "description": """
