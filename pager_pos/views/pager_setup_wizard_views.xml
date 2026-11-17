@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pager_setup_wizard_form" model="ir.ui.view">
+        <field name="name">pager.setup.wizard.form</field>
+        <field name="model">pager.setup.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Dingly Setup">
+                <group>
+                    <field name="pos_config_id"/>
+                    <field name="api_base" placeholder="https://dingly.win"/>
+                    <field name="token"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pager_setup_wizard" model="ir.actions.act_window">
+        <field name="name">Dingly Setup</field>
+        <field name="res_model">pager.setup.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_pager_setup"
+        name="Dingly Setup"
+        parent="point_of_sale.menu_point_config_product"
+        action="action_pager_setup_wizard"
+        sequence="45"
+        groups="point_of_sale.group_pos_manager"/>
+</odoo>

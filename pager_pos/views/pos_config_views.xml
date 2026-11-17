@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_config_view_form_pager" model="ir.ui.view">
+        <field name="name">pos.config.form.pager</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Dingly" name="pager_pos">
+                    <field name="pager_api_base" placeholder="https://dingly.win"/>
+                    <field name="pager_site_id"/>
+                    <field name="pager_counter_code"/>
+                    <field name="pager_counter_name"/>
+                    <field name="pager_is_connected" readonly="1"/>
+                    <button
+                        name="%(action_pager_setup_wizard)d"
+                        type="action"
+                        string="Dingly Setup"
+                        class="btn-primary"
+                        colspan="2"
+                        context="{'default_pos_config_id': id}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_pos_config_kanban_pager" model="ir.ui.view">
+        <field name="name">pos.config.kanban.pager</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="pager_status_summary"/>
+            </xpath>
+            <xpath expr="//div[hasclass('o_kanban_manage_view')]" position="inside">
+                <div role="menuitem">
+                    <a name="action_pager_orders" type="object">Dingly orders</a>
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='card_left']/parent::div" position="after">
+                <div class="row g-0 ms-2 mt-2" name="pager_desk">
+                    <div class="col-12">
+                        <button class="btn btn-secondary" name="action_pager_place_order" type="object">Place order</button>
+                        <button class="btn btn-link" name="action_pager_refresh_orders" type="object">Refresh status</button>
+                    </div>
+                    <div class="col-12 mt-1">
+                        <field name="pager_status_summary"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

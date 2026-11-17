@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pager_pos.PagerWidget">
+        <div class="pager-widget" t-if="order" t-att-class="{'pager-state-track': record.status === 'on_track', 'pager-state-ready': record.status === 'done', 'pager-state-closed': record.status === 'not_done', 'pager-state-off': !configured or record.status === 'not_done' or (!record.status and !record.assigned), 'pager-state-err': statusIsError, 'pager-state-late': offline}">
+            <div class="pager-widget-head">
+                <span class="pager-widget-title"><svg class="pager-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4a26 26 0 1 1-12.1 49L8.6 59.5a1.6 1.6 0 0 1-2.3-1.9l3.4-11.4A26 26 0 0 1 32 4z" fill="#d9480f"/><g fill="#f5efe6"><rect x="28.6" y="19" width="6.8" height="2.6" rx="1.3"/><rect x="30.9" y="20.4" width="2.2" height="5"/><path d="M20.5 37a11.5 11.5 0 0 1 23 0z"/><rect x="17.5" y="38.4" width="29" height="4.2" rx="2.1"/></g></svg>Dingly</span>
+                <span class="pager-widget-number" t-if="displayNumber" t-esc="displayNumber"/>
+            </div>
+            <t t-if="configured">
+                <button t-if="!onRail" type="button" class="btn btn-lg pager-assign" t-on-click="toggleAssign" t-att-disabled="state.busy or capFull" t-esc="assignLabel"/>
+                <div t-else="" class="pager-status-control" role="group" aria-label="Dingly status">
+                    <button type="button" t-on-click="setOnTrack" t-att-class="statusClass('on_track')" t-att-disabled="state.busy" t-att-aria-pressed="record.status === 'on_track' ? 'true' : 'false'">On track</button>
+                    <button type="button" t-on-click="setDone" t-att-class="statusClass('done')" t-att-disabled="state.busy" t-att-aria-pressed="record.status === 'done' ? 'true' : 'false'">Done</button>
+                    <button type="button" t-on-click="setNotDone" t-att-class="statusClass('not_done')" t-att-disabled="state.busy" t-att-aria-pressed="record.status === 'not_done' ? 'true' : 'false'">Not done</button>
+                </div>
+                <p t-att-class="offline ? 'pager-status-line pager-status-late pager-icon-refresh' : statusIsError ? 'pager-status-line pager-status-error pager-icon-warn' : 'pager-status-line pager-status-ok'" role="status" aria-live="polite" t-esc="statusLine"/>
+            </t>
+            <p t-else="" class="pager-status-line pager-status-error" role="status">Connect this register in Point of Sale, Configuration, Dingly Setup.</p>
+        </div>
+    </t>
+</templates>

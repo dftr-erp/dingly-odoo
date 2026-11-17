@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_pager_dingly_app" model="ir.actions.client">
+        <field name="name">Dingly</field>
+        <field name="tag">pager_pos.dingly_app</field>
+    </record>
+
+    <menuitem
+        id="menu_pager_app_root"
+        name="Dingly"
+        action="action_pager_dingly_app"
+        web_icon="pager_pos,static/description/icon.png"
+        sequence="60"
+        groups="point_of_sale.group_pos_user"/>
+
+    <menuitem
+        id="menu_pager_app"
+        name="Dingly"
+        parent="point_of_sale.menu_point_root"
+        action="action_pager_dingly_app"
+        sequence="16"
+        groups="point_of_sale.group_pos_user"/>
+</odoo>

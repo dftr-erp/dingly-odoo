@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pager_pos.PagerRail">
+        <section t-if="configured" class="pager-rail" t-att-class="{'is-collapsed': ui.collapsed, 'is-offline': rail.offline, 'is-full': capFull}" aria-label="Dingly rail">
+            <header class="pager-rail-head">
+                <button type="button" class="pager-rail-title" t-on-click="toggleCollapsed" t-att-aria-expanded="ui.collapsed ? 'false' : 'true'">
+                    <svg class="pager-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4a26 26 0 1 1-12.1 49L8.6 59.5a1.6 1.6 0 0 1-2.3-1.9l3.4-11.4A26 26 0 0 1 32 4z" fill="#d9480f"/><g fill="#f5efe6"><rect x="28.6" y="19" width="6.8" height="2.6" rx="1.3"/><rect x="30.9" y="20.4" width="2.2" height="5"/><path d="M20.5 37a11.5 11.5 0 0 1 23 0z"/><rect x="17.5" y="38.4" width="29" height="4.2" rx="2.1"/></g></svg>
+                    <span>On the rail</span>
+                    <span t-if="ui.collapsed and count" class="pager-rail-badge" t-esc="count"/>
+                </button>
+                <span class="pager-rail-summary" role="status" aria-live="polite" t-esc="summary"/>
+                <span t-if="capDots.length" class="pager-rail-cap" t-att-title="count + ' / ' + rail.limit + ' pagers in use'">
+                    <t t-foreach="capDots" t-as="used" t-key="used_index">
+                        <i t-att-class="used ? 'is-used' : ''"/>
+                    </t>
+                    <small><t t-esc="count"/>/<t t-esc="rail.limit"/></small>
+                </span>
+                <div t-if="ui.composing" class="pager-rail-compose">
+                    <span class="pager-rail-hash">#</span>
+                    <input t-ref="railNumber" type="text" inputmode="numeric" maxlength="40" placeholder="Order number" t-model="ui.number" t-on-keydown="onComposeKey" t-att-disabled="ui.sending"/>
+                    <button type="button" class="btn btn-primary btn-sm" t-on-click="send" t-att-disabled="ui.sending or !ui.number.trim()">Send</button>
+                    <button type="button" class="btn btn-link btn-sm pager-rail-x" t-on-click="closeCompose" aria-label="Cancel">✕</button>
+                </div>
+                <button t-else="" type="button" class="btn btn-primary btn-sm pager-rail-send" t-on-click="openCompose" t-att-disabled="capFull" t-att-title="capFull ? 'All pagers are in use. Mark one done first.' : ''">
+                    + Send order to rail
+                </button>
+                <button t-if="dinglyConfigured" type="button" class="pager-rail-open" t-on-click="openDingly" title="Open Dingly" aria-label="Open Dingly">
+                    <svg class="pager-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4a26 26 0 1 1-12.1 49L8.6 59.5a1.6 1.6 0 0 1-2.3-1.9l3.4-11.4A26 26 0 0 1 32 4z" fill="#d9480f"/><g fill="#f5efe6"><rect x="28.6" y="19" width="6.8" height="2.6" rx="1.3"/><rect x="30.9" y="20.4" width="2.2" height="5"/><path d="M20.5 37a11.5 11.5 0 0 1 23 0z"/><rect x="17.5" y="38.4" width="29" height="4.2" rx="2.1"/></g></svg>
+                </button>
+                <button type="button" class="pager-rail-chevron" t-on-click="toggleCollapsed" t-att-aria-label="ui.collapsed ? 'Show the rail' : 'Hide the rail'">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </header>
+            <p t-if="ui.sendError" class="pager-rail-send-error" role="alert" t-esc="ui.sendError"/>
+            <div t-if="!ui.collapsed" class="pager-rail-body">
+                <div class="pager-rail-bar" aria-hidden="true"/>
+                <div class="pager-rail-tickets">
+                    <div t-if="rail.loaded and !count" class="pager-rail-empty">
+                        <span class="pager-rail-empty-bell">🛎️</span>
+                        <span>Nothing waiting. Paid orders you send show up here, and so do orders from the Dingly desk.</span>
+                    </div>
+                    <t t-foreach="tickets" t-as="t" t-key="t.posOrderUuid">
+                        <article class="pager-rail-ticket" t-att-class="{'is-late': t.late, 'is-overdue': t.overdue, 'is-current': t.isCurrent, 'is-pending': t.pending, 'is-pending-done': t.pending and t.pending.status === 'done', 'has-error': t.error}">
+                            <span t-if="t.isCurrent" class="pager-rail-tag">This sale</span>
+                            <div class="pager-rail-num" t-esc="t.displayNumber"/>
+                            <div class="pager-rail-where"><t t-esc="t.where"/><span class="pager-rail-src" t-esc="t.source"/></div>
+                            <div class="pager-rail-wait"><t t-if="t.minutes &lt; 1">just now</t><t t-else=""><t t-esc="t.minutes"/> min</t></div>
+                            <t t-if="t.pending">
+                                <div class="pager-rail-pending">
+                                    <t t-if="t.pending.status === 'done'">✓ Ready in <t t-esc="t.countdown"/> s</t>
+                                    <t t-else="">Closing in <t t-esc="t.countdown"/> s</t>
+                                </div>
+                                <button type="button" class="pager-rail-undo" t-on-click="() => this.undo(t)">Undo</button>
+                            </t>
+                            <t t-else="">
+                                <button type="button" class="pager-rail-done" t-on-click="() => this.mark(t, 'done')">Done</button>
+                                <button type="button" class="pager-rail-notdone" t-on-click="() => this.mark(t, 'not_done')">Not done</button>
+                                <button type="button" class="pager-rail-guest" t-on-click="() => this.openGuest(t)" t-att-disabled="!t.guestUrl">Guest view</button>
+                            </t>
+                            <p t-if="t.error" class="pager-rail-error" t-esc="t.error"/>
+                        </article>
+                    </t>
+                </div>
+            </div>
+        </section>
+    </t>
+</templates>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pager_desk_order_list" model="ir.ui.view">
+        <field name="name">pager.desk.order.list</field>
+        <field name="model">pager.desk.order</field>
+        <field name="arch" type="xml">
+            <list decoration-info="status == 'on_track'" decoration-success="status == 'done'" decoration-muted="status == 'not_done'">
+                <header>
+                    <button name="action_refresh" type="object" string="Refresh status"/>
+                </header>
+                <field name="display_number"/>
+                <field name="status"/>
+                <field name="status_message"/>
+                <field name="counter_code"/>
+                <field name="pos_config_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_pager_desk_order_form" model="ir.ui.view">
+        <field name="name">pager.desk.order.form</field>
+        <field name="model">pager.desk.order</field>
+        <field name="arch" type="xml">
+            <form string="Dingly order">
+                <header>
+                    <button name="action_place" type="object" string="Place order" class="btn-primary"/>
+                    <button name="action_set_on_track" type="object" string="On track"/>
+                    <button name="action_set_done" type="object" string="Done"/>
+                    <button name="action_set_not_done" type="object" string="Not done"/>
+                    <button name="action_refresh" type="object" string="Refresh status"/>
+                    <field name="status" widget="statusbar" statusbar_visible="on_track,done,not_done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="pos_config_id"/>
+                        <field name="display_number"/>
+                        <field name="counter_code"/>
+                        <field name="public_id"/>
+                        <field name="pos_order_uuid"/>
+                        <field name="status_message"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pager_desk_order_search" model="ir.ui.view">
+        <field name="name">pager.desk.order.search</field>
+        <field name="model">pager.desk.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="display_number"/>
+                <field name="pos_config_id"/>
+                <filter name="on_track" string="On track" domain="[('status', '=', 'on_track')]"/>
+                <filter name="done" string="Done" domain="[('status', '=', 'done')]"/>
+                <filter name="not_done" string="Not done" domain="[('status', '=', 'not_done')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_pager_desk_order" model="ir.actions.act_window">
+        <field name="name">Dingly Orders</field>
+        <field name="res_model">pager.desk.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Place a pager order</p>
+            <p>Enter the order number, then place it. The status code comes from the pager service.</p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_pager_orders"
+        name="Dingly Orders"
+        parent="point_of_sale.menu_point_root"
+        action="action_pager_desk_order"
+        sequence="15"
+        groups="point_of_sale.group_pos_user"/>
+</odoo>

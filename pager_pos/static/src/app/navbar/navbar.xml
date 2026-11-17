@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//CashierName" position="before">
+            <button t-if="dinglyConfigured" type="button" class="btn btn-light btn-lg lh-lg pager-navbar-btn" t-on-click="openDingly" title="Open the Dingly shop app">
+                <svg class="pager-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4a26 26 0 1 1-12.1 49L8.6 59.5a1.6 1.6 0 0 1-2.3-1.9l3.4-11.4A26 26 0 0 1 32 4z" fill="#d9480f"/><g fill="#f5efe6"><rect x="28.6" y="19" width="6.8" height="2.6" rx="1.3"/><rect x="30.9" y="20.4" width="2.2" height="5"/><path d="M20.5 37a11.5 11.5 0 0 1 23 0z"/><rect x="17.5" y="38.4" width="29" height="4.2" rx="2.1"/></g></svg>
+                <span t-if="!ui.isSmall">Dingly</span>
+            </button>
+        </xpath>
+    </t>
+</templates>
